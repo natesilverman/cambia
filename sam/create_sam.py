@@ -16,6 +16,7 @@ with open(yaml_file, 'r') as stream:
      
         dicta = {k:v for d in data['lambda_functions'] for k, v in d.items()}
         #print(dicta) 
+        # In the event of multiple lambda functions in the file, would need to iterate here
         #for k, v in dicta.items():
         lambda_code = dicta['lambda_code']
         lambda_code_base = dicta['lambda_code_base']
@@ -47,6 +48,8 @@ copyfile(lambda_code, destfile)
 file = open("template.yaml","w")
 file.write("AWSTemplateFormatVersion : '2010-09-09'\n")
 file.write("Transform: AWS::Serverless-2016-10-31\n")
+# Would be ideal to split out boilerplate header stuff 
+# With individual functions in the event of multiple
 file.write("Description: " + description + "\n")
 file.write("Globals: \n")
 file.write("    Function: \n")
