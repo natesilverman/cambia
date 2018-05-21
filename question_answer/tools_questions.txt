@@ -1,0 +1,37 @@
+TOOLS
+
+1. In your opinion, what's helpful about version control systems?  What's annoying about them?
+
+Version control systems are indispensable in modern team computing environments.  They are helpful for so many reasons:
+- Users can work on the same code simultaneously and merge their results
+- Branching & merging strategies can be employed to facilitate constant development even in the midst of code freezes, production releases, project deliverables and hot fixes.
+- They are central to build and delivery pipelines and the code that is often used to manage the pipelines and underlying infrastructure itself.
+- They allow for code reviews, feedback loops, improvement techniques and collaboration across team members.
+- They are great for works in progress and proofs of concept that aren't ready to be production-ready but are excellent for sound boarding of new ideas and developments.
+- They provide an audit trail of exactly who did what when, thus making it easier to revert if undesired changes were introduced.
+
+Version control systems can also cause pretty significant annoyances and business problems in a number of scenarios:
+- A particular branch has some useful code but has drifted so far from what is in master that rebasing is necessary and yet simultaneously impossible because of the drift.
+- Code conflicts that cannot be merged correctly can cause very lengthy and problematic manual merges whereby no particular individual knows the single source of truth for what code should be in the final version.
+- Code mismatches and conflicts can cause disagreements between team members about the best approach to solving particular technical problems, depending on the point of view of the developers involved and the individual problems they are trying solve.
+
+2. What are some pros and cons of using Docker to develop, test and deploy software?
+
+Some of the pros would be:
+- Can test on a different OS than your development OS within a virtualenv.
+- Can have any environmental dependencies build into the base image of Docker for use by developers, thus obscuring the env dependencies and management of them from the developer
+- Containers can be stripped down to only exactly what is necessary to run the individual service in question, so as to avoid bloated file systems, unnecessary processes and excess memory footprint.
+- Can optimize hardware utilization by specifying hardware limitations for a docker process, then maximizing utilization of underlying hardware by running as many services as the hardware vs. hardware specification requirements will allow.
+ - Boot up of the container is much faster because of the limited software and init.d processes involved.  Thus stop/start/restart are all much faster.
+ 
+ Some of the cons would be:
+ - Being very stripped down by definition, a lot of the typical security components are often stripped out of base images, making them vulnerable to attack.
+ - Since containers are running on the same underlying kernel, they are not 100% isolated and can run the risk of exposure of other containers on the same kernel.
+ - Networking can be challenging with containers as they are usually running multiple of them on the same underlying network address.
+ - Logging can be a challenge for a number of reasons, but a primary one is that as soon as the main service/process fails for whatever reason, the container dies and the logs from the failed service/process are no longer available unless special care has been taken to get that log output out of the container to a place where it can be viewed after the container has died.
+ 
+3. How do you choose which language to use for a given task?  How did you choose the language for the programming exercise above?
+
+Usually this is done from the point of view of which task is needed to be executed.  If there is something that needs to be fairly free of dependencies and runnable on any variety of UNIX systems, that would lean towards some kind of shell programming like bash.  If there is something that relies on boto3 python libraries and functions that are included within boto3, that would typically be done by using python and often require some kind of dependencies to be installed on the system for the program to run.  ORM and/or back end APIs needing sophisticated database integration might use languages like Java and/or Scala, requiring complex library management and pre-compilation.  Front-end and more lightweight functionality might require NodeJS and/or AJAX to asynchronously display results in the browser.
+
+I chose the Python in the exercise above because it required moto in order to mock out the AWS services locally.  As such, using the moto decorators appeared to be most easily done in Python (or those were the examples that I derived my work from), so that was the natural path of least resistance to accomplish the task as I understood it.

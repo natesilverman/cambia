@@ -1,0 +1,13 @@
+lambda_functions:
+  - function_name: HelloWorldFunction
+    timeout: 10 
+    handler: app.lambda_handler
+    runtime: python2.7
+    lambda_code: app.py
+    lambda_code_base: hello_world/
+    description: A hello world application.
+    uri: hello_world/build/
+    event: HelloWorld
+    type: Api
+    path: /hello
+    method: get

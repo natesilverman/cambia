@@ -1,0 +1,11 @@
+- Explain in detail why these tests might be helpful in the future
+
+It is important to know what the outcome of the ECS script will be for a multitude of reasons:
+	Remembering the purpose of the script.
+	Recognizing what outputs are currently expected such that we can maintain backwards compatibility if the script changes.
+	Validating that the output is still consistent in the event that the docker base image that the script pulls changes.
+	Validating that the script does what it is supposed to do and maintains whatever handshake contract the script is designed to accommodate.
+	Tests could be a helpful baseline in the event we build out the scripts to support lots of different Gateway API calls.
+	Implementing the steps with regex to validate that things like the arn specifications are adhered to, the string output is exactly correct, the cluster arn is in a valid format, etc.
+	
+Testing script integration points in a continuous integration cycle will notice if anything breaks as quickly as possible, so including the tests with implemented steps in a pipeline of some kind will expose if and when anything undesirable gets introduced.
